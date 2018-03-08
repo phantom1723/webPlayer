@@ -1,0 +1,10 @@
+<div class="home">
+  <button (click)="playAudio()">Play</button>
+
+  <audio src="http://freemusicarchive.org/music/Hicham_Chahidi/~/Gracias_1354" ></audio>
+  
+  <button routerLink="/user" routerLinkActive="active">My songs</button>
+<!--<p>{{this.inf.aTracks[0].track_title}}</p>-->
+
+  <div>{{this.inf.aTracks | json}} </div>
+</div>
