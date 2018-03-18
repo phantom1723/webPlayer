@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {GetMusicService, RequestedDataInterface} from '../../services/get-music.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +13,8 @@ export class HomeComponent implements OnInit {
   inf: RequestedDataInterface;
 
 
-  constructor(private getMusicService: GetMusicService) {
+  constructor(private getMusicService: GetMusicService,
+              private authService: AuthService,) {
     this.showData();
 
   }
@@ -23,19 +27,11 @@ showData() {
 
   };
 
-  show() {
-
+  signOut() {
+     this.authService.signOutUser()
+        .subscribe();
   }
 
-
-
-  playAudio(i) {
-/*
-    var audio = new Audio(this.inf.aTracks[0].track_listen_url);
-
-    audio.play();*/
-    console.log('work');
-  }
 
   ngOnInit() {
   }

@@ -1,12 +1,12 @@
 <div class="login">
-  <form action="">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <label for="email">Email</label>
-    <input id="email" type="email">
+    <input id="email" type="email" formControlName="email">
 
     <label for="password">Password</label>
-    <input id="password" type="password">
+    <input id="password" type="password" formControlName="password">
 
-    <button routerLink="/home" routerLinkActive="active">Log in</button>
+    <button>Log in</button>
     <p>Don't have an account? <a routerLink="/registration" routerLinkActive="active">Sign Up</a> </p>
   </form>
 </div>

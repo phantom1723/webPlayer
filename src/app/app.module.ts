@@ -3,9 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule }          from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { GetMusicService } from './services/get-music.service';
+import { AuthService } from './services/auth.service';
+
 
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
@@ -16,11 +19,11 @@ import { UserSettingsComponent } from './pages/user-settings/user-settings.compo
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const appRoutes: Routes = [
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'signUp', component: RegistrationComponent },
+  { path: 'signIn', component: LoginComponent },
+  { path: '', component: HomeComponent },
   { path: 'user', component: UserComponent },
-  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '',   redirectTo: '/signIn', pathMatch: 'full' },
   { path: 'user-settings', component: UserSettingsComponent },
   { path: '**', component: NotFoundComponent }
 ];
@@ -40,9 +43,10 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
-  providers: [ GetMusicService ],
+  providers: [ GetMusicService, AuthService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
