@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   listen() {
-    return this.http.get('http://localhost:8888/music');
+    return this.http.get('http://localhost:8888/searchTrackByName:love');
   }
 }
 

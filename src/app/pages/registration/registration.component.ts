@@ -32,15 +32,9 @@ export class RegistrationComponent implements OnInit {
         const user = this.form.value;
 
         this.authService.createNewUser(user)
-            .subscribe(data => data = this.inf);
-        console.log(this.inf);
+            .subscribe();
 
 }
 
-listen() {
-    this.authService.listen()
-        .subscribe(data => this.inf);
-
-}
 
 }

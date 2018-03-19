@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,9 +13,11 @@ import { User } from '../../models/user.model';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  inf: any;
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -25,8 +30,14 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const user = this.form.value;
 
+
+
     this.authService.signInUser(user)
-        .subscribe();
+        .subscribe(data => {this.inf = data;
+          if(this.inf.status === '200') {
+            this.router.navigate(['/']);
+          }
+          console.log(this.inf);});
   }
 
 }
