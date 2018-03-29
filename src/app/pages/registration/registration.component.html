@@ -1,7 +1,7 @@
 <div class="registration">
     <form [formGroup]="form" class="form-group" (ngSubmit)="onSubmit()">
         <label for="name">Name</label>
-        <input id='name' type="text" class="form-control" formControlName="name" >
+        <input id='name' type="text" class="form-control" formControlName="name">
 
         <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)"
              class="alert alert-danger">
@@ -46,10 +46,10 @@
         <div *ngIf="error">{{error}}</div>
 
 
-        <input type="submit" value="Sign up" >
+        <input type="submit" value="Sign up">
 
     </form>
-    <p>Already have an account? <a routerLink="/signIn" routerLinkActive="active">Log In</a> </p>
+    <p>Already have an account? <a routerLink="/signIn" routerLinkActive="active">Log In</a></p>
 
 
 </div>

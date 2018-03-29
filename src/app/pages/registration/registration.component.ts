@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-import {User} from '../../models/user.model';
 import {Router} from '@angular/router';
 
 
@@ -59,7 +58,6 @@ export class RegistrationComponent implements OnInit {
                     this.error = 'Something\'s wrong. Please, try again.';
                 }
                 console.log(this.inf);
-
             });
     }
 }

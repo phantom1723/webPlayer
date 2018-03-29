@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user.model';
 
@@ -32,8 +31,20 @@ export class AuthService {
         return this.http.get('http://localhost:8888/signOut', {withCredentials: true});
     }
 
-    listen() {
-        return this.http.get('http://localhost:8888/searchTrackByName:numb', {responseType: 'text'});
+    changeUserPassword(password: string) {
+        return this.http.post('http://localhost:8888/changePassword', password, {withCredentials: true});
+    }
+
+    changeUserName(name: string) {
+        return this.http.post('http://localhost:8888/changeName', name, {withCredentials: true});
+    }
+
+    changeUserEmail(email: string) {
+        return this.http.post('http://localhost:8888/changeEmail', email, {withCredentials: true});
+    }
+
+    deleteUser() {
+        return this.http.get('http://localhost:8888/deleteUser', {withCredentials: true});
     }
 }
 
