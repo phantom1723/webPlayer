@@ -20,6 +20,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {UserModule} from "./pages/user/user.module";
 import { HeaderComponent } from './widgets/header/header.component';
 import { FooterComponent } from './widgets/footer/footer.component';
+import { PlayerComponent } from './widgets/player/player.component';
 
 const appRoutes: Routes = [
   { path: 'signUp', component: RegistrationComponent },
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     UserSettingsComponent,
     NotFoundComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,
