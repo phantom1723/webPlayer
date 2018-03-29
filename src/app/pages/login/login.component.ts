@@ -1,43 +1,59 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user.model';
-import { Router } from '@angular/router';
-
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
+import {User} from '../../models/user.model';
+import {Router} from '@angular/router';
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
-  inf: any;
+    form: FormGroup;
+    inf: any;
+    error: string;
 
 
-  constructor(private authService: AuthService,
-              private router: Router) {
-  }
+    constructor(private authService: AuthService,
+                private router: Router) {
+    }
 
-  ngOnInit() {
-    this.form = new FormGroup({
-      'email': new FormControl('', Validators.required),
-      'password': new FormControl('', Validators.required),
-    });
-  }
+    ngOnInit() {
+        this.form = new FormGroup({
+            'email': new FormControl('',[
+                Validators.required,
+                Validators.minLength(6)
+            ]),
+            'password': new FormControl('',[
+                Validators.required,
+                Validators.minLength(4)
+            ]),
+        });
+    }
 
-  onSubmit() {
-    const user = this.form.value;
+    get email() { return this.form.get('email'); }
 
+    get password() { return this.form.get('password'); }
 
+    onSubmit() {
+        const user = this.form.value;
 
-    this.authService.signInUser(user)
-        .subscribe(data => {this.inf = data;
-          if(this.inf.status === '200') {
-            this.router.navigate(['/']);
-          }
-          console.log(this.inf);});
-  }
+        if(this.form.value.email && this.form.value.password) {
+
+        this.authService.signInUser(user)
+            .subscribe(data => {
+                this.inf = data;
+                if (this.inf.user) {
+                    this.error = '';
+                    this.router.navigate(['/']);
+                    this.authService.login(this.inf.user);
+                } else { this.error = 'Something\'s wrong. Please, check again.';}
+                console.log(this.inf);
+
+            });
+        }
+    }
 
 }

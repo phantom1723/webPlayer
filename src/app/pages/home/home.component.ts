@@ -32,18 +32,21 @@ showData() {
 
   signOut() {
      this.authService.signOutUser()
-        .subscribe();
+        .subscribe(data => {
+            this.inf = data;
+            if (this.inf.status == 200) {
+                this.router.navigate(['/signIn']);
+                this.authService.logout();
+            }
+            console.log(this.inf);});
   }
 
     listen() {
         this.authService.listen()
             .subscribe(data => {
-                this.inf = data;
-
-
-                console.log(this.inf);
+                this.inf = JSON.parse(data);
+                console.log(this.inf.tracks.tracks.items[1]);
             });
-
     }
 
 

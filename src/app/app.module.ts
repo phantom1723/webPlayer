@@ -15,8 +15,11 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from './pages/user/user.component';
-import { UserSettingsComponent } from './pages/user-settings/user-settings.component';
+import { UserSettingsComponent } from './pages/user/user-settings/user-settings.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import {UserModule} from "./pages/user/user.module";
+import { HeaderComponent } from './widgets/header/header.component';
+import { FooterComponent } from './widgets/footer/footer.component';
 
 const appRoutes: Routes = [
   { path: 'signUp', component: RegistrationComponent },
@@ -37,7 +40,9 @@ const appRoutes: Routes = [
     HomeComponent,
     UserComponent,
     UserSettingsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule
   ],
-  providers: [ GetMusicService, AuthService ],
+  providers: [ GetMusicService, AuthService, UserModule ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
