@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule }          from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,12 +21,14 @@ import {UserModule} from "./pages/user/user.module";
 import { HeaderComponent } from './widgets/header/header.component';
 import { FooterComponent } from './widgets/footer/footer.component';
 import { PlayerComponent } from './widgets/player/player.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const appRoutes: Routes = [
   { path: 'signUp', component: RegistrationComponent },
   { path: 'signIn', component: LoginComponent },
   { path: '', component: HomeComponent },
   { path: 'user', component: UserComponent },
+  { path: 'login', component: LoginComponent },
   { path: '',   redirectTo: '/signIn', pathMatch: 'full' },
   { path: 'user-settings', component: UserSettingsComponent },
   { path: '**', component: NotFoundComponent }
@@ -51,9 +53,11 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [ GetMusicService, AuthService, UserModule ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

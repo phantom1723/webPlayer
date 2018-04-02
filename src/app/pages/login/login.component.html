@@ -1,40 +1,65 @@
-<div class="login">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" required>
+<div class="container">
+    <div class="row">
+        <!-- <div class="login">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <label for="email">Email</label>
+                <input id="email" type="email" formControlName="email" required>
 
-        <div *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)"
-             class="alert alert-danger">
+                <div *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)"
+                    class="alert alert-danger">
 
-            <div *ngIf="form.get('email')['errors'] ['required']">
-                Email is required.
+                    <div *ngIf="form.get('email')['errors'] ['required']">
+                        Email is required.
+                    </div>
+                    <div *ngIf="form.get('email')['errors'] ['minlength']">
+                        Email must be at least 6 characters long.
+                    </div>
+
+                </div>
+
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" required>
+
+                <div *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)"
+                    class="alert alert-danger">
+
+                    <div *ngIf="form.get('password')['errors'] ['required']">
+                        Password is required.
+                    </div>
+                    <div *ngIf="form.get('password') ['errors'] ['minlength'] &&  form.get('password') ['errors'] ['minlength'] ['requiredLength']">
+                        Password must be at least 4 characters long.
+                    </div>
+
+                </div>
+
+                <div *ngIf="error">{{error}}</div>
+
+                <button>Log in</button>
+                <p>Don't have an account? <a routerLink="/signUp" routerLinkActive="active">Sign Up</a></p>
+            </form>
+        </div> -->
+        <!-- Login form -->
+        <form>
+            <p class="h5 text-center mb-4">Sign in</p>
+
+            <div class="md-form">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input type="text" id="defaultForm-email" class="form-control" mdbActive>
+                <label for="defaultForm-email">Your email</label>
             </div>
-            <div *ngIf="form.get('email')['errors'] ['minlength']">
-                Email must be at least 6 characters long.
+
+            <div class="md-form">
+                <i class="fa fa-lock prefix grey-text"></i>
+                <input type="password" id="defaultForm-pass" class="form-control" mdbActive>
+                <label for="defaultForm-pass">Your password</label>
             </div>
 
-        </div>
-
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" required>
-
-        <div *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)"
-             class="alert alert-danger">
-
-            <div *ngIf="form.get('password')['errors'] ['required']">
-                Password is required.
+            <div class="text-center">
+                <button class="btn btn-default waves-light" mdbRippleRadius>Login</button>
             </div>
-            <div *ngIf="form.get('password') ['errors'] ['minlength'] &&  form.get('password') ['errors'] ['minlength'] ['requiredLength']">
-                Password must be at least 4 characters long.
-            </div>
-
-        </div>
-
-        <div *ngIf="error">{{error}}</div>
-
-        <button>Log in</button>
-        <p>Don't have an account? <a routerLink="/signUp" routerLinkActive="active">Sign Up</a></p>
-    </form>
+        </form>
+        <!-- Login form -->
+    </div>
 </div>
 
 
