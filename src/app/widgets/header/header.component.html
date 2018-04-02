@@ -1,0 +1,8 @@
+<header>
+    <form action="" (submit)="onSubmit()">
+        <input type="text" [formControl]="form">
+    </form>
+
+    <button><a routerLink="/user" routerLinkActive="active">Profile</a></button>
+    <button (click)="signOut()">Log out</button>
+</header>
