@@ -3,6 +3,8 @@ let localStrategy = require('passport-local').Strategy;
 let User = require('../models/user.schema');
 let jwt = require('jsonwebtoken');
 
+let mailer = require("nodemailer");
+
 passport.use('signIn',new localStrategy({usernameField: 'email', passReqToCallback: true,session:false},function(req,email, password, done) {
   User.findOne({ email: email }, function (err, user) {
       if (err) { return done(err); }
@@ -14,14 +16,42 @@ passport.use('signIn',new localStrategy({usernameField: 'email', passReqToCallba
 ));
 
 passport.use('signUp',new localStrategy({ usernameField: 'email', passReqToCallback: true , session: false},function(req,email, password, done) {
+  let smtpTransport = mailer.createTransport({
+    type: 'OAuth2',
+    service: "Gmail",
+    secure: false,
+    ignoreTLS: true,
+    auth: {
+      user: "music.one.test@gmail.com",
+      pass: "musicone1"
+    }
+  });
+
+  let mail = {
+    from: "music.one.test<from@gmail.com>",
+    to: email,
+    subject: "regisatration",
+    text: "Your are registared"
+  }
+
   User.findOne({ email: email }, function (err, user) {
     if (err) { return done(err); }
     if(!req.body.name){return done(null,false);}
     if (user) { return done(null, false); }else{
-      let newUser = new User({email: email, name: req.body.name});
-      newUser.setPassword(password);
-      newUser.save();
-      return done(null, newUser);
+
+      smtpTransport.sendMail(mail, function(error, response){
+        if(error){
+          return done(null, false);
+        }else{
+          smtpTransport.close();
+
+          let newUser = new User({email: email, name: req.body.name});
+          newUser.setPassword(password);
+          newUser.save();
+
+          return done(null, newUser);
+        }
+      });
     }
   });
   }
