@@ -45,7 +45,7 @@ router.post('/signUp', function(req, res, next) {
 
       let playlist = new user_tracks({id_creator: user._id, playlist: [{playlistName:"default"}]});
       playlist.save();
-
+      console.log(user._id);
       res.json({status:200,token: token});
     }
   })(req, res, next);

@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.use(passport.initialize());
 
-mongoose.connect('mongodb://admin:admin@ds115579.mlab.com:15579/spotify', function (err) {
+mongoose.connect('mongodb://admin:admin@ds139919.mlab.com:39919/spotify', function (err) {
   if (err) throw err;
   console.log('Successfully connected');
 });

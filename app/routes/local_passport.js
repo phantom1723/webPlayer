@@ -30,8 +30,8 @@ passport.use('signUp',new localStrategy({ usernameField: 'email', passReqToCallb
   let mail = {
     from: "music.one.test<from@gmail.com>",
     to: email,
-    subject: "regisatration",
-    text: "Your are registared"
+    subject: "registration",
+    text: "you are registered"
   }
 
   User.findOne({ email: email }, function (err, user) {
