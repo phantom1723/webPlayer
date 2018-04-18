@@ -1,31 +1,45 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {GetMusicService} from '../../services/get-music.service';
-import {AuthService} from '../../services/auth.service';
-import {Router} from '@angular/router';
-
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-    inf: any;
+export class HomeComponent implements OnInit{
+    newReleases: any;
+    localStorage = localStorage;
+    tracks: any;
 
-    constructor(private getMusicService: GetMusicService) {
+    constructor(private getMusicService: GetMusicService) {}
+
+    ngOnInit() {
+        if(this.localStorage.getItem('tracks') != 'undefined') {
+            this.tracks = JSON.parse(this.localStorage.getItem('tracks'));
+        } else {
+            this.getNewReleases();
+        }
     }
 
-    listen() {
-        this.getMusicService.searchTrackByName('numb')
+    getNewReleases() {
+        this.getMusicService.getNewReleases()
             .subscribe(data => {
-                this.inf = JSON.parse(data);
-                console.log(this.inf.tracks.tracks.items[1]);
+                this.newReleases = JSON.parse(data);
+                this.localStorage.setItem('tracks', JSON.stringify(this.newReleases.tracks.albums.items));
+                this.tracks = this.newReleases;
+                console.log(this.tracks);
             });
     }
 
-
-    ngOnInit() {
+    display(inf) {
+        this.localStorage.setItem('tracks', JSON.stringify(inf));
+        this.tracks = inf;
     }
 
-
+    onClick(url) {
+        if(url) {
+            let audio = new Audio(url);
+            audio.play();
+        }
+    }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 
 
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     error: string;
 
 
-    constructor(private authService: AuthService,
+    constructor(private userService: UserService,
                 private router: Router) {
     }
 
@@ -32,31 +32,22 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    get email() {
-        return this.form.get('email');
-    }
-
-    get password() {
-        return this.form.get('password');
-    }
-
     onSubmit() {
         const user = this.form.value;
 
         if (this.form.value.email && this.form.value.password) {
-
-            this.authService.signInUser(user)
+            this.userService.signInUser(user)
                 .subscribe(data => {
                     this.inf = data;
-                    if (this.inf.user) {
+
+                    if (this.inf.status === 200) {
                         this.error = '';
+                        this.userService.login(this.inf.token);
                         this.router.navigate(['/']);
-                        this.authService.login(this.inf.user);
                     } else {
-                        this.error = 'Something\'s wrong. Please, check again.';
+                        this.error = this.inf.err;
                     }
                     console.log(this.inf);
-
                 });
         }
     }

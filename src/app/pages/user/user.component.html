@@ -1,7 +1,14 @@
+<app-header (submit)="onSubmit()"></app-header>
+
 <div class="user">
     <p>Hello, {{user.name}}</p>
+    <form [formGroup]="form" class="form-group" (ngSubmit)="createPlaylist()">
+        <input type="text">
+        <input type="submit" value="Create new playlist">
+    </form>
 
-    <button routerLink="/user-settings" routerLinkActive="active">Settings</button>
+
+    <button routerLink="/user/settings" routerLinkActive="active">Settings</button>
 
 </div>
 

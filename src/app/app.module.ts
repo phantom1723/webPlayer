@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { GetMusicService } from './services/get-music.service';
-import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 
 import { AppComponent } from './app.component';
@@ -16,20 +16,22 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UserComponent } from './pages/user/user.component';
 import { UserSettingsComponent } from './pages/user/user-settings/user-settings.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {UserModule} from "./pages/user/user.module";
 import { HeaderComponent } from './widgets/header/header.component';
 import { FooterComponent } from './widgets/footer/footer.component';
 import { PlayerComponent } from './widgets/player/player.component';
+import {RecoveryComponent} from "./pages/recovery/recovery.component";
+import {RouterTestingModule} from "@angular/router/testing";
 
 const appRoutes: Routes = [
   { path: 'signUp', component: RegistrationComponent },
   { path: 'signIn', component: LoginComponent },
   { path: '', component: HomeComponent },
   { path: 'user', component: UserComponent },
+  { path: 'recovery', component: RecoveryComponent },
   { path: '',   redirectTo: '/signIn', pathMatch: 'full' },
-  { path: 'user-settings', component: UserSettingsComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: 'user/settings', component: UserSettingsComponent },
+  { path: '**', component: HomeComponent }
 ];
 
 
@@ -41,7 +43,7 @@ const appRoutes: Routes = [
     HomeComponent,
     UserComponent,
     UserSettingsComponent,
-    NotFoundComponent,
+    RecoveryComponent,
     HeaderComponent,
     FooterComponent,
     PlayerComponent
@@ -51,9 +53,10 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+      RouterTestingModule
   ],
-  providers: [ GetMusicService, AuthService, UserModule ],
+  providers: [ GetMusicService, UserService, UserModule ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router} from "@angular/router";
+import * as jwt_decode from 'jwt-decode';
 
 @NgModule({
     imports: [
@@ -17,15 +18,15 @@ export class UserModule {
 
     checkUser(): string {
         const isAuth = JSON.parse(localStorage.getItem('isAuth'));
-        let data;
+        let data,
+        decodedInf;
         if (isAuth == true) {
-            data = JSON.parse(localStorage.getItem('user'));
-        }
-
-        if (isAuth == false) {
-            this.router.navigate(['/signIn']);
-        } else {
+            data = localStorage.getItem('token');
+            data = jwt_decode(data);
+            console.log(data);
             return this.user = data;
+        } else {
+            this.router.navigate(['/signIn']);
         }
     }
 }

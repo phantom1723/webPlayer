@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../../services/auth.service';
+import {UserService} from '../../../services/user.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {AuthService} from '../../../services/auth.service';
 export class UserSettingsComponent implements OnInit {
     form: FormGroup;
 
-    constructor(private authService: AuthService) {
+    constructor(private userService: UserService) {
     }
 
     ngOnInit() {
@@ -43,29 +43,18 @@ export class UserSettingsComponent implements OnInit {
     onSubmit() {
         let value = this.form.value;
 
-        if (value.name) {
-            this.authService.changeUserName(value.name)
-                .subscribe(data => {
-                    console.log('name change');
-                });
-
-            if (value.email) {
-                this.authService.changeUserEmail(value.email)
-                    .subscribe(data => {
+                this.userService.changeNameAndEmail(value.name, value.email)
+                    .subscribe(() => {
                         console.log('email change');
                     });
-            }
-            if (value.password) {
-                this.authService.changeUserEmail(value.email)
-                    .subscribe(data => {
-                        console.log('password change');
-                    });
-            }
-        }
+
+                this.userService.changeUserPassword(value.password)
+                    .subscribe();
+
     }
 
     deleteUser() {
-        this.authService.deleteUser()
+        this.userService.deleteUser()
             .subscribe(() => console.log('user deleted'));
     }
 }

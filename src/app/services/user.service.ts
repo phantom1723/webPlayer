@@ -4,19 +4,24 @@ import {User} from '../models/user.model';
 
 
 @Injectable()
-export class AuthService {
+export class UserService {
 
     constructor(private http: HttpClient) {
     }
 
-    login(user) {
+    login(token) {
         localStorage.setItem('isAuth', 'true');
-        localStorage.setItem('user', JSON.stringify({name: user.name}));
+        localStorage.setItem('token', token);
     }
 
     logout() {
         localStorage.setItem('isAuth', 'false');
-        localStorage.setItem('user', '');
+        localStorage.setItem('token', '');
+    }
+
+    recoveryPwd(email) {
+        let data = {email: email};
+        return this.http.post('http://localhost:8888/recoveryPwd', data, {withCredentials: true});
     }
 
     createNewUser(user: User) {
@@ -32,15 +37,13 @@ export class AuthService {
     }
 
     changeUserPassword(password: string) {
-        return this.http.post('http://localhost:8888/changePassword', password, {withCredentials: true});
+        let data = {password: password};
+        return this.http.post('http://localhost:8888/user/changePassword', data, {withCredentials: true});
     }
 
-    changeUserName(name: string) {
-        return this.http.post('http://localhost:8888/changeName', name, {withCredentials: true});
-    }
-
-    changeUserEmail(email: string) {
-        return this.http.post('http://localhost:8888/changeEmail', email, {withCredentials: true});
+    changeNameAndEmail(name: string, email: string) {
+        let data = {name: name, email:email};
+        return this.http.post('http://localhost:8888/user/changeNameAndEmail', data, {withCredentials: true});
     }
 
     deleteUser() {

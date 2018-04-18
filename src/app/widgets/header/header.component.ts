@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../services/user.service';
+import {GetMusicService} from '../../services/get-music.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,11 +9,15 @@ import {Router} from '@angular/router';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
-    inf: any;
+export class HeaderComponent implements OnInit {
     form: FormControl;
+    inf: any;
+    localStorage = localStorage;
 
-    constructor(private authService: AuthService,
+    @Output() searchedTracks = new EventEmitter<any>();
+
+    constructor(private userService: UserService,
+                private  getMusicService: GetMusicService,
                 private router: Router) {
     }
 
@@ -21,18 +26,32 @@ export class HeaderComponent implements OnInit{
     }
 
     signOut() {
-        this.authService.signOutUser()
+        this.userService.signOutUser()
             .subscribe(data => {
                 this.inf = data;
                 if (this.inf.status == 200) {
                     this.router.navigate(['/signIn']);
-                    this.authService.logout();
+                    this.userService.logout();
                 }
                 console.log(this.inf);
             });
     }
 
     onSubmit() {
-        console.log(this.form.value);
+        this.getMusicService.searchTrackByName(this.form.value)
+            .subscribe(data => {
+                this.inf = JSON.parse(data);
+
+                if (this.inf.status == 200) {
+                    this.inf = this.inf.tracks.tracks.items;
+                    this.localStorage.setItem('tracks', JSON.stringify(this.inf));
+                    console.log(this.inf);
+                    this.searchedTracks.emit(this.inf);
+
+                } else if (this.inf.status == 401) {
+                    this.router.navigate(['/signIn']);
+                    this.userService.logout();
+                }
+            });
     }
 }

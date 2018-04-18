@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
-
 
 @Component({
     selector: 'app-registration',
@@ -14,8 +13,8 @@ export class RegistrationComponent implements OnInit {
     inf: any;
     error: string;
 
-    constructor(private authService: AuthService,
-                private router: Router,) {
+    constructor(private userService: UserService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -49,15 +48,17 @@ export class RegistrationComponent implements OnInit {
 
     onSubmit() {
         const user = this.form.value;
-        this.authService.createNewUser(user)
+        this.userService.createNewUser(user)
             .subscribe(data => {
                 this.inf = data;
-                if (this.inf.user) {
+                if (this.inf.status === 200) {
+                    this.error = '';
                     this.router.navigate(['/']);
-                } else {
-                    this.error = 'Something\'s wrong. Please, try again.';
-                }
-                console.log(this.inf);
-            });
-    }
+                    this.userService.login(this.inf.token);
+
+        } else {
+            this.error = 'Something\'s wrong. Please, check again.';
+        }
+    });
+}
 }
