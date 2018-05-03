@@ -1,15 +1,25 @@
 <app-header *ngIf="localStorage.getItem('token')" (searchedTracks)="display($event)"></app-header>
 
 <div class="home">
-       <ul>
-        <li *ngFor="let item of tracks">
+    <ul>
+        <li *ngFor="let item of tracks; let i = index">
 
-            <img src="{{item.images ? item.images[1].url : item.album.images[1].url}}" alt="" >
+            <img src="{{item.images ? item.images[1].url : item.album.images[1].url}}" alt="">
             <audio src="{{item.preview_url}}"></audio>
 
             <p (click)="onClick(item.preview_url)">|></p>
             <span>{{item.name}}</span>
             <span>||{{item.artists[0].name}}</span>
+
+            <div>
+                <p (mouseover)="showPlaylists(i)">+</p>
+                <ul class="playlists {{playlistsClass}}">
+                    <li *ngFor="let playlist of playlists" (click)="addToPlaylist(item, playlist.playlistName)">
+                        {{playlist.playlistName}}
+                    </li>
+                </ul>
+            </div>
+
         </li>
     </ul>
 

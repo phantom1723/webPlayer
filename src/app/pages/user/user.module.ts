@@ -23,7 +23,6 @@ export class UserModule {
         if (isAuth == true) {
             data = localStorage.getItem('token');
             data = jwt_decode(data);
-            console.log(data);
             return this.user = data;
         } else {
             this.router.navigate(['/signIn']);

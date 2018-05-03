@@ -14,10 +14,10 @@ import {Router} from "@angular/router";
 export class UserComponent implements OnInit {
     isAuth: boolean;
     user: any;
-    inf: any;
     form: FormControl;
     tracks: any;
     localStorage = localStorage;
+    playlist: any;
 
     constructor(private  userModule: UserModule,
                 private  getMusicService: GetMusicService,
@@ -35,17 +35,17 @@ export class UserComponent implements OnInit {
     }
 
     createPlaylist() {
+        console.log(this.form.value);
         this.getMusicService.createPlaylist(this.form.value)
             .subscribe(data => {
-                this.inf = JSON.parse(data);
-                console.log(this.inf);
+                this.playlists();
             });
     }
 
     playlists() {
         this.getMusicService.getPlaylist()
             .subscribe(data => {
-                console.log(data);
+                this.playlist = data.tracks.playlist;
             });
     }
 
@@ -54,5 +54,18 @@ export class UserComponent implements OnInit {
         setTimeout(() => {
             this.router.navigate(['/']);
         }, 1000);
+    }
+
+    removeTrackFromPlaylist(playlistName, trackName) {
+        let data = {
+            playlistName: playlistName,
+            trackName: trackName
+        };
+
+        this.getMusicService.removeTrackFromPlaylist(data)
+            .subscribe(data => {
+                console.log(data);
+                this.playlists();
+            });
     }
 }

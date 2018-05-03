@@ -12,7 +12,6 @@ export interface RequestedDataInterface {
 @Injectable()
 export class GetMusicService {
     wasSearched: boolean = false;
-    data: any;
 
     constructor(private http: HttpClient) {
     }
@@ -32,7 +31,7 @@ export class GetMusicService {
 
     createPlaylist(playlistName: string) {
         let data = {playlistName: playlistName};
-        return this.http.post('http://localhost:8888/user/createPlaylist', data, {responseType: 'text'});
+        return this.http.post('http://localhost:8888/user/createPlaylist', data, {withCredentials: true});
     }
 
     getNewReleases() {
@@ -40,9 +39,14 @@ export class GetMusicService {
     }
 
     getPlaylist() {
-        return this.http.get('http://localhost:8888/user/home', {responseType: 'text'});
+        return this.http.get('http://localhost:8888/user/home', {withCredentials: true});
 
     }
+    addTrackToPlaylist(data) {
+        return this.http.post('http://localhost:8888/user/addTrackToPlaylist', data, {withCredentials: true});
+    }
 
+    removeTrackFromPlaylist(data) {
+        return this.http.post('http://localhost:8888/user/removeTrackFromPlaylist', data, {withCredentials: true});
+    }
 }
-

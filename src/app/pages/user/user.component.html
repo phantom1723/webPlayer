@@ -2,10 +2,29 @@
 
 <div class="user">
     <p>Hello, {{user.name}}</p>
-    <form [formGroup]="form" class="form-group" (ngSubmit)="createPlaylist()">
-        <input type="text">
+    <form (ngSubmit)="createPlaylist()">
+        <input type="text" [formControl]="form">
         <input type="submit" value="Create new playlist">
     </form>
+
+    <div *ngFor="let item of playlist">
+        <h2>{{item.playlistName}}</h2>
+
+        <ul>
+            <li *ngFor="let track of item.tracks">
+<!--
+                <img src="{{item.images ? item.images[1].url : item.album.images[1].url}}" alt="">
+-->
+                <audio src="{{track.preview_url}}"></audio>
+
+               <!-- <p (click)="onClick(track.preview_url)">|></p>-->
+                <span>{{track.trackName}}</span>
+                <span>||{{track.artistName}}</span>
+                <span (click)="removeTrackFromPlaylist(item.playlistName, track.trackName)">|| x</span>
+            </li>
+
+        </ul>
+    </div>
 
 
     <button routerLink="/user/settings" routerLinkActive="active">Settings</button>
