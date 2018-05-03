@@ -6,7 +6,7 @@ let mongoose = require('mongoose');
 require('dotenv').load();
 let signRoutes = require('./app/routes/signRoutes');
 let userRoutes = require('./app/routes/userRoutes');
-
+var session = require('express-session');
 let cors = require('cors');
 
 const port = process.env.PORT || 8888;
@@ -18,10 +18,15 @@ app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
-
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: process.env.SECRET
+}));
 app.use(passport.initialize());
+app.use(passport.session());
 
-mongoose.connect('mongodb://admin:admin@ds139919.mlab.com:39919/spotify', function (err) {
+mongoose.connect('mongodb://admin:'+ process.env.MLABPASSWORD + '@ds139919.mlab.com:39919/spotify', function (err) {
   if (err) throw err;
   console.log('Successfully connected');
 });
