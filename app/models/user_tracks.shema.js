@@ -12,10 +12,21 @@ let user_tracksSchema = new mongoose.Schema({
     },
     tracks:[{
       trackName: {default: "Noname", type: String},
-      artistName: String,
-      albumName: String,
-      duration_ms: String,
-      preview_url: String
+      image: {
+        type: String
+      },
+      artistName: {
+        type: String
+      },
+      albumName: {
+        type: String
+      },
+      duration_ms: {
+        type: String
+      },
+      preview_url: {
+        type: String
+      }
     }]
   }]
 });

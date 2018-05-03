@@ -1,8 +1,8 @@
 let passport = require('passport');
 let localStrategy = require('passport-local').Strategy;
 let User = require('../models/user.schema');
+let user_tracks = require('../models/user_tracks.shema');
 let jwt = require('jsonwebtoken');
-
 let mailer = require("nodemailer");
 
 passport.use('signIn',new localStrategy({usernameField: 'email', passReqToCallback: true,session:false},function(req,email, password, done) {
@@ -23,7 +23,7 @@ passport.use('signUp',new localStrategy({ usernameField: 'email', passReqToCallb
     ignoreTLS: true,
     auth: {
       user: "music.one.test@gmail.com",
-      pass: "musicone1"
+      pass: process.env.GoogleTestOnePassword
     }
   });
 
@@ -39,7 +39,7 @@ passport.use('signUp',new localStrategy({ usernameField: 'email', passReqToCallb
     if(!req.body.name){return done(null,false);}
     if (user) { return done(null, false); }else{
 
-      smtpTransport.sendMail(mail, function(error, response){
+      smtpTransport.sendMail(mail, function(error){
         if(error){
           return done(null, false);
         }else{
@@ -47,9 +47,15 @@ passport.use('signUp',new localStrategy({ usernameField: 'email', passReqToCallb
 
           let newUser = new User({email: email, name: req.body.name});
           newUser.setPassword(password);
-          newUser.save();
+          newUser.save(function(err) {
+            if (err) throw err;
 
-          return done(null, newUser);
+            let playlist = new user_tracks({id_creator: user._id, playlist: [{playlistName:"default"}]});
+            playlist.save(function(err) {
+              if (err) throw err;
+              return done(null, newUser);
+            });
+          });
         }
       });
     }
@@ -70,7 +76,7 @@ passport.deserializeUser(function(user, done) {
 function checkAuthentication(req,res,next){
   var token = req.cookies['token'];
   if (token) {
-    jwt.verify(token,'secret', function(err, decoded) {
+    jwt.verify(token,process.env.SECRET, function(err, decoded) {
       if (err) {
         return res.json({ status: 401, error: 'Failed to authenticate token.' });
       } else {
@@ -84,7 +90,7 @@ function checkAuthentication(req,res,next){
   }
 }
 
-module.exports.passport = passport;
+module.exports = passport;
 module.exports.checkAuthentication = checkAuthentication;
 
 

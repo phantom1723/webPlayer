@@ -12,6 +12,10 @@ let userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  id_social_network:{
+    type: String,
+    default: 'null',
+  },
   hash: String,
   salt: String
 });
@@ -35,7 +39,7 @@ userSchema.methods.generateJwt = function () {
     email:this.email,
     name:this.name,
     exp:parseInt(expiry.getTime() / 1000),
-  },'secret');
+  },process.env.SECRET);
 };
 
 let User = mongoose.model('User', userSchema);
