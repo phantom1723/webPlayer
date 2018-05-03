@@ -1,8 +1,43 @@
-<header>
-    <form action="" (submit)="onSubmit()">
-        <input type="text" [formControl]="form">
-    </form>
-
-    <button><a routerLink="/user" routerLinkActive="active">Profile</a></button>
-    <button (click)="signOut()">Log out</button>
-</header>
+<header>         
+    <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="false">
+        <logo class="logo-main">
+            <a routerLink="" class="logo navbar-brand"><img src="../../../assets/img/icons/Logo.svg" alt="Logo" class="img-responsive"></a>
+        </logo>
+        <links class="nav-links">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item waves-light" mdbRippleRadius>
+                    <a routerLink="" class="nav-link">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius>
+                    <a routerLink="/user" class="nav-link">Profile</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-login">
+                <li class="nav-item waves-light divider" mdbRippleRadius>
+                    <a routerLink="/login" class="nav-link"><i class="fa fa-sign-in"></i></a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius>
+                    <a routerLink="/signUp" class="nav-link"><i class="fa fa-sign-out"></i></a>
+                </li>
+            </ul>
+        </links>
+    </mdb-navbar>
+    <!-- life Search -->
+    <div class="view hm-purple-light" style="background-image: url(../assets/img/main-bg.jpg);">
+        <div class="full-bg-img flex-center">
+            <div class="container text-center white-text wow fadeInUp animated">
+                <h2>Find your favorite track</h2>
+                <!-- Search form -->
+                <form class="form-inline  waves-light" mdbRippleRadius>
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                </form>
+                <!-- /Search form -->
+            </div>
+        </div>
+        
+    </div>
+    <div class="container wow fadeIn animated">
+        <app-player></app-player>
+    </div>
+</header>  
+ 

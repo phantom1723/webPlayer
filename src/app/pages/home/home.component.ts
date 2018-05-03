@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
     inf: any;
 
     constructor(private getMusicService: GetMusicService) {
+
     }
 
     listen() {
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
             });
     }
 
+    
 
     ngOnInit() {
     }

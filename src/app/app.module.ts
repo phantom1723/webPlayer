@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule }          from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -24,12 +24,11 @@ import { PlayerComponent } from './widgets/player/player.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 const appRoutes: Routes = [
-  { path: 'signUp', component: RegistrationComponent },
-  { path: 'signIn', component: LoginComponent },
   { path: '', component: HomeComponent },
-  { path: 'user', component: UserComponent },
+  { path: 'signUp', component: RegistrationComponent },
+  { path: 'user', component: UserComponent, data: {preload: true} },
   { path: 'login', component: LoginComponent },
-  { path: '',   redirectTo: '/signIn', pathMatch: 'full' },
+  { path: 'header', component: HeaderComponent },
   { path: 'user-settings', component: UserSettingsComponent },
   { path: '**', component: NotFoundComponent }
 ];
@@ -52,7 +51,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, 
+      { preloadingStrategy: PreloadAllModules }),
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot()
   ],

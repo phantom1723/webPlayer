@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+	background: #fafafa;
+}
+// Home nav
+$navbar-color: #6D0B3F;
+
+.navbar {
+	background-color: transparent;
+}
+.top-nav-collapse {
+	background-color: $navbar-color;
+}
