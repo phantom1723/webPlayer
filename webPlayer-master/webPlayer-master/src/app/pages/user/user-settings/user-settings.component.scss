@@ -1,0 +1,27 @@
+.user-settings {
+    margin-top: 5rem;
+    .h2 {
+        margin-bottom: 1em;
+        font-weight: 400;
+    }
+}
+.arrow-back {
+    position: absolute;
+    padding: 10px;
+    left: calc(7rem - 2rem);
+    top: 1rem;
+    .fa {
+        font-size: 25px;
+        color: #ccc;
+        padding: 5px;
+        &:hover {
+            color: #ad1457;
+            transition: all .4s ease;
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .arrow-back {
+        left: calc(3rem - 2rem);
+    }
+}

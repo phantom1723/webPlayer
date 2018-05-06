@@ -1,11 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GetMusicService} from '../../services/get-music.service';
 import {Router} from "@angular/router";
+import { PlayerComponent } from '../../widgets/player/player.component'
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
     newReleases: any;
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
         } else if (this.localStorage.getItem('tracks') != 'undefined') {
             this.tracks = JSON.parse(this.localStorage.getItem('tracks'));
             this.tracks = Array.from(this.tracks);
+            console.log(this.tracks);
+
         }
 
         if (!this.localStorage.getItem('isAuth')) {
@@ -55,34 +58,7 @@ export class HomeComponent implements OnInit {
         }
     }
 
-    addToPlaylist(track, playlist) {
-        let data1 = {
-            playlistName: playlist,
-            tracksName: track.name,
-            artistName: this.getArtistsNames(track.artists),
-            albumName: track.album.name,
-            duration_ms: track.duration_ms,
-            preview_url: track.preview_url || 'empty'
-        };
 
-        let data2 = {
-            playlistName: 'default',
-            tracksName: track.name,
-            artistName: this.getArtistsNames(track.artists),
-            albumName: track.album.name,
-            duration_ms: track.duration_ms,
-            preview_url: track.preview_url || 'empty'
-        };
-
-        this.getMusicService.addTrackToPlaylist(data1)
-            .subscribe(data => {
-                console.log(data);
-                console.log(data1);
-            });
-
-        this.getMusicService.addTrackToPlaylist(data2)
-            .subscribe();
-    }
 
     getArtistsNames(data): string {
         let artists: string = data[0].name;
@@ -99,15 +75,7 @@ export class HomeComponent implements OnInit {
 
     }
 
-    showPlaylists(i) {
-        console.log(i);
-        this.getMusicService.getPlaylist()
-            .subscribe(data => {
-                this.playlists = Array.from(data.tracks.playlist);
-            });
 
-        this.playlistsClass = '';
-    }
 }
 
 /*

@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule }          from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import {RouterTestingModule} from "@angular/router/testing";
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 import { GetMusicService } from './services/get-music.service';
@@ -21,7 +23,6 @@ import { HeaderComponent } from './widgets/header/header.component';
 import { FooterComponent } from './widgets/footer/footer.component';
 import { PlayerComponent } from './widgets/player/player.component';
 import {RecoveryComponent} from "./pages/recovery/recovery.component";
-import {RouterTestingModule} from "@angular/router/testing";
 
 const appRoutes: Routes = [
   { path: 'signUp', component: RegistrationComponent },
@@ -46,16 +47,18 @@ const appRoutes: Routes = [
     RecoveryComponent,
     HeaderComponent,
     FooterComponent,
-    PlayerComponent
+    PlayerComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
+    MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
       RouterTestingModule
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [ GetMusicService, UserService, UserModule ],
   bootstrap: [ AppComponent ]
 })

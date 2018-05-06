@@ -1,0 +1,23 @@
+.logo {
+  height: 50px;
+  width: 45px;
+  padding: 5px; }
+
+.social-footer {
+  display: flex;
+  justify-content: center; }
+  .social-footer .social-item {
+    padding: 10px; }
+    .social-footer .social-item .fa {
+      font-size: 25px; }
+
+.footer-copyright {
+  padding-top: 2em;
+  padding-bottom: 5em; }
+  .footer-copyright .span-copyright {
+    font-size: 18px; }
+  .footer-copyright .fa {
+    font-size: 35px;
+    margin-left: 10px; }
+
+/*# sourceMappingURL=footer.component.css.map */

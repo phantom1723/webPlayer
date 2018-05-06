@@ -1,0 +1,19 @@
+.user {
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+  position: relative;
+  .h4 {
+    margin-bottom: 2rem;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    .navbar-nav {
+      flex-direction: row;
+    }
+  }
+}

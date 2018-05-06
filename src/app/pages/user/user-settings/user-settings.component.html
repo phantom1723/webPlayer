@@ -1,42 +1,55 @@
-<h2>Change profile information</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-9 col-sm-10 col-md-7">
+            <div class="user-settings wow fadeInUp animated">
+                <h2 class="h2 grey-text">Change profile information</h2>
 
-<form [formGroup]="form" class="form-group" (ngSubmit)="onSubmit()">
-    <label for="name">Name</label>
-    <input id='name' type="text" class="form-control" formControlName="name">
+                <form [formGroup]="form" class="form-group" (submit)="onSubmit()">
+                    <!-- Change profile name -->
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="name" class="form-control" formControlName="name" mdbActive>
+                        <label for="name">Your Name</label>
+                    </div>
 
-    <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)"
-         class="alert alert-danger">
+                    <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)" class="alert alert-danger wow fadeIn animated">
+                        <div *ngIf="form.get('name')['errors'] ['minlength']">
+                            Name must be at least 6 characters long.
+                        </div>
+                    </div>
+                    <!-- Change profile email -->
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="email" id="email" class="form-control" formControlName="email" mdbActive>
+                        <label for="email">Your email</label>
+                    </div>
 
-        <div *ngIf="form.get('name')['errors'] ['minlength']">
-            name must be at least 6 characters long.
+                    <div *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)" class="alert alert-danger wow fadeIn animated">
+                        <div *ngIf="form.get('email')['errors'] ['minlength']">
+                            Email must be at least 6 characters long.
+                        </div>
+                    </div>
+                    <!-- Change profile password -->
+                    <div class="md-form">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="password" id="password" formControlName="password" class="form-control" mdbActive>
+                        <label for="password">Your password</label>
+                    </div>
+
+                    <div *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)" class="alert alert-danger wow fadeIn animated">
+                        <div *ngIf="form.get('password') ['errors'] ['minlength'] &&  form.get('password') ['errors'] ['minlength'] ['requiredLength']">
+                            Password must be at least 4 characters long.
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Save" class="btn btn-unique waves-light">
+
+                    <button (submit)="deleteUser()" class="btn btn-danger waves-light">Delete user</button>
+                </form>
+            </div>
         </div>
-
-    </div>
-
-    <label for="email">Email</label>
-    <input id="email" type="email" formControlName="email">
-
-    <div *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)"
-         class="alert alert-danger">
-
-        <div *ngIf="form.get('email')['errors'] ['minlength']">
-            Email must be at least 6 characters long.
+        <div class="arrow-back">
+            <a routerLink="/user"><i class="fa fa-arrow-left"></i></a>
         </div>
     </div>
-
-    <label for="password">Password</label>
-    <input id="password" type="password" formControlName="password">
-
-    <div *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)"
-         class="alert alert-danger">
-
-        <div *ngIf="form.get('password') ['errors'] ['minlength'] &&  form.get('password') ['errors'] ['minlength'] ['requiredLength']">
-            Password must be at least 4 characters long.
-        </div>
-
-    </div>
-
-    <input type="submit" value="Save">
-
-    <button (submit)="deleteUser()">Delete user</button>
-</form>
+</div>

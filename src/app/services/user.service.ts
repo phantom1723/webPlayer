@@ -49,5 +49,13 @@ export class UserService {
     deleteUser() {
         return this.http.get('http://localhost:8888/deleteUser', {withCredentials: true});
     }
+
+    registrateWithGoogle() {
+        return this.http.get('http://localhost:8888/auth/google', {withCredentials: true});
+    }
+
+    registrateWithTwitter() {
+        return this.http.get('http://localhost:8888/auth/twitter', {withCredentials: true});
+    }
 }
 

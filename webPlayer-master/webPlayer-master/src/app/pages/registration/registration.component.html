@@ -1,0 +1,73 @@
+<div class="container">
+   <div class="row justify-content-md-center">
+        <div class="col-sm-12 col-md-6">
+            <div class="registration wow fadeIn animated">
+                <!-- Sing up form -->
+                <form [formGroup]="form" class="form-group" (ngSubmit)="onSubmit()">
+                    <p class="h5 text-center mb-4">Sign up</p>
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="name" class="form-control" formControlName="name" mdbActive>
+                        <label for="name">Your name</label>
+                    </div>
+                    <!-- invalid block -->
+                    <div *ngIf="form.get('name').invalid && (form.get('name').dirty || form.get('name').touched)" class="alert alert-danger wow fadeIn animated">
+                        <div *ngIf="form.get('name')['errors'] ['required']">
+                            Name is required.
+                        </div>
+                        <div *ngIf="form.get('name')['errors'] ['minlength']">
+                            Name must be at least 6 characters long.
+                        </div>
+                    </div>
+
+                    <div class="md-form">
+                        <i class="fa fa-envelope prefix grey-text"></i>
+                        <input type="email" id="email" class="form-control" formControlName="email" mdbActive>
+                        <label for="email">Your email</label>
+                    </div>
+                    <!-- invalid block -->
+                    <div *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)" class="alert alert-danger wow fadeIn animated">
+                        <div *ngIf="form.get('email')['errors'] ['required']">
+                            Email is required.
+                        </div>
+                        <div *ngIf="form.get('email')['errors'] ['minlength']">
+                            Email must be at least 6 characters long.
+                        </div>
+                    </div>
+
+                    <div class="md-form">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="password" id="password" formControlName="password" class="form-control" mdbActive>
+                        <label for="password">Your password</label>
+                    </div>
+                    <!-- invalid block -->
+                    <div *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)" class="alert alert-danger wow fadeIn animated">
+                        <div *ngIf="form.get('password')['errors'] ['required']">
+                            Password is required.
+                        </div>
+                        <div *ngIf="form.get('password') ['errors'] ['minlength'] &&  form.get('password') ['errors'] ['minlength'] ['requiredLength']">
+                            Password must be at least 4 characters long.
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="error">{{error}}</div>
+                    <div class="text-center">
+                        <button class="btn btn-unique waves-light" type="submit" value="Sign up" mdbRippleRadius>Register</button>
+                    </div>
+                </form>
+                <div class="social-login text-center">
+                    <p class="text-center mt-4">Connect with:</p>
+                    <a class="btn btn-fb waves-light" mdbWavesEffect><i class="fa fa-facebook"></i></a>
+                    <a class="btn btn-tw waves-light" mdbWavesEffect><i class="fa fa-twitter"></i></a>
+                    <a class="btn btn-gplus waves-light" mdbWavesEffect><i class="fa fa-google-plus"></i></a>
+                </div>
+                <!-- /Sing up form -->
+                <p class="p-redirect text-right mt-4">Already have an account? <a routerLink="/login" routerLinkActive="active">Log In</a></p>
+            </div>
+        </div>
+        <div class="close">
+            <a routerLink="" routerLinkActive="active"><i class="fa fa-times"></i></a>
+        </div>
+    </div> 
+</div>

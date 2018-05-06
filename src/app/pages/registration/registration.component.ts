@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
     selector: 'app-registration',
     templateUrl: './registration.component.html',
-    styleUrls: ['./registration.component.css']
+    styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
     form: FormGroup;
@@ -56,9 +56,41 @@ export class RegistrationComponent implements OnInit {
                     this.router.navigate(['/']);
                     this.userService.login(this.inf.token);
 
-        } else {
-            this.error = 'Something\'s wrong. Please, check again.';
-        }
-    });
-}
+                } else {
+                    this.error = 'Something\'s wrong. Please, check again.';
+                }
+            });
+    }
+
+    registrateTwitter() {
+        this.userService.registrateWithTwitter()
+            .subscribe(data => {
+                console.log(data);
+               /* this.inf = data;
+                if (this.inf.status === 200) {
+                    this.error = '';
+                    this.router.navigate(['/']);
+                    this.userService.login(this.inf.token);
+
+                } else {
+                    this.error = 'Something\'s wrong. Please, check again.';
+                }*/
+            });
+    }
+
+    registrateGoogle() {
+        this.userService.registrateWithGoogle()
+            .subscribe(data => {
+                console.log(data);
+                 /*this.inf = data;
+                 if (this.inf.status === 200) {
+                 this.error = '';
+                 this.router.navigate(['/']);
+                 this.userService.login(this.inf.token);
+
+                 } else {
+                 this.error = 'Something\'s wrong. Please, check again.';
+                 } */
+            });
+    }
 }

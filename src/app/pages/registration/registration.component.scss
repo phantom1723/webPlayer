@@ -1,0 +1,34 @@
+.registration {
+  position: relative;
+  top: 15vh;
+  height: 50vh;
+  .social-login {
+    .btn-fb {
+      background-color: #3b5998;
+      color: #fff;
+    }
+    .btn-tw {
+      background-color: #55acee;
+      color: #fff;
+    }
+    .btn-gplus {
+      background-color: #dd4b39;
+      color: #fff;
+    }
+  }
+  .p-redirect {
+    border-top:  1px solid #ccc;
+  }
+}
+.close {
+  height: 45px;
+  position: absolute;
+  padding: 10px;
+  right: calc(10rem - 2rem);
+  top: 2rem;
+}
+@media only screen and (max-width: 850px) {
+  .close {
+    right: calc(6rem - 2rem);
+  }
+}

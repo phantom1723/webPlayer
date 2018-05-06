@@ -1,0 +1,26 @@
+.logo {
+  height: 50px;
+  width: 45px;
+  padding: 5px;
+}
+.social-footer {
+  display: flex;
+  justify-content: center;
+  .social-item {
+    padding: 10px;
+    .fa {
+      font-size: 25px;
+    }
+  }
+}
+.footer-copyright {
+  padding-top: 2em;
+  padding-bottom: 5em;
+  .span-copyright {
+    font-size: 18px;
+  }
+  .fa {
+    font-size: 35px;
+    margin-left: 10px;
+  }
+}

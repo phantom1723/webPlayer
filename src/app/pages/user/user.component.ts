@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
-    styleUrls: ['./user.component.css']
+    styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
     isAuth: boolean;
@@ -46,6 +46,7 @@ export class UserComponent implements OnInit {
         this.getMusicService.getPlaylist()
             .subscribe(data => {
                 this.playlist = data.tracks.playlist;
+                console.log(data);
             });
     }
 
