@@ -9,6 +9,9 @@ let userRoutes = require('./app/routes/userRoutes');
 var session = require('express-session');
 let cors = require('cors');
 
+let google_passport = require('./app/routes/google_passport');
+let twitter_passport = require('./app/routes/twitter_passport');
+
 const port = process.env.PORT || 8888;
 app.use(cors({credentials: true, origin: 'http://localhost:4200'}));
 
