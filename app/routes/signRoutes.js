@@ -18,7 +18,7 @@ router.get('/twitter/callback', function(req, res, next) {
     }else{
       var token = user.generateJwt();
       res.cookie('token',token,{httpOnly: true});
-      res.json({status:200,token: token});
+      res.redirect('http://localhost:4200');
     }
   })(req, res, next);
 });
@@ -35,7 +35,7 @@ router.get('/google/callback', function(req, res, next) {
     }else{
       var token = user.generateJwt();
       res.cookie('token',token,{httpOnly: true});
-      res.json({status:200,token: token});
+      res.redirect('http://localhost:4200');
     }
   })(req, res, next);
 });
@@ -50,7 +50,7 @@ router.post('/signIn', function(req, res, next) {
     }else{
       var token = user.generateJwt();
       res.cookie('token',token,{httpOnly: true});
-      res.json({status:200,token: token});
+      res.redirect('http://localhost:4200');
     }
   })(req, res, next);
 });
@@ -65,7 +65,7 @@ router.post('/signUp', function(req, res, next) {
     }else{
       var token = user.generateJwt();
       res.cookie('token',token,{httpOnly: true});
-      res.json({status:200,token: token});
+      res.redirect('http://localhost:4200');
     }
   })(req, res, next);
 });

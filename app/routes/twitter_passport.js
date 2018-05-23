@@ -8,7 +8,7 @@ passport.use('signUpTwitter',new twitterStrategy({
     consumerKey: process.env.TwitterConsumerKey,
     consumerSecret: process.env.TwitterConsumerSecret,
     userProfileURL  : 'https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true',
-    callbackURL: "http://localhost:8888/twitter/callback",
+    callbackURL: "https://web-player.herokuapp.com/twitter/callback",
     passReqToCallback   : true
   },
   function(req, accessToken, refreshToken, profile, done) {

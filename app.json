@@ -1,0 +1,8 @@
+{
+    "name": "JS Course Web-player",
+    "description": "",
+    "repository": "https://github.com/VitaliiLynnyk/webPlayer/tree/back-end",
+    "logo": "",
+    "keywords": ["node", "express", "heroku"],
+    "image": "heroku/nodejs"
+  }

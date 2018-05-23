@@ -7,7 +7,7 @@ let mailer = require("nodemailer");
 passport.use('signUpGoogle',new GoogleStrategy({
     clientID: process.env.GoogleClientID,
     clientSecret: process.env.GoogleClientSecret,
-    callbackURL: "http://localhost:8888/google/callback",
+    callbackURL: "https://web-player.herokuapp.com/google/callback",
     passReqToCallback   : true
   },
   function(req, accessToken, refreshToken, profile, done) {
