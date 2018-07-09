@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 
 import {UserModule} from './user.module';
 import {FormControl} from "@angular/forms";
 import {GetMusicService} from "../../services/get-music.service";
 import {Router} from "@angular/router";
-
+import {UserService} from "../../services/user.service";
+import {PlaylistItem} from "./playlistsInterface"
 
 @Component({
     selector: 'app-user',
@@ -13,60 +14,61 @@ import {Router} from "@angular/router";
 })
 export class UserComponent implements OnInit {
     isAuth: boolean;
-    user: any;
     form: FormControl;
-    tracks: any;
-    localStorage = localStorage;
-    playlist: any;
+    playlist: PlaylistItem[];
 
     constructor(private  userModule: UserModule,
                 private  getMusicService: GetMusicService,
+                private userService: UserService,
                 private  router: Router) {
-        this.checkUser();
         this.playlists();
     }
 
+    signOut(): void {
+        this.userService.signOutUser()
+            .subscribe((data: any) => {
+                if (data.status == 200) {
+                    this.router.navigate(['/signIn']);
+                    this.userService.logout();
+                }
+            });
+    }
+
     ngOnInit() {
+        this.userModule.checkUser();
         this.form = new FormControl();
     }
 
-    checkUser() {
-        this.user = this.userModule.checkUser();
-    }
-
-    createPlaylist() {
-        console.log(this.form.value);
+    createPlaylist(): void {
         this.getMusicService.createPlaylist(this.form.value)
-            .subscribe(data => {
+            .subscribe(() => {
                 this.playlists();
             });
     }
 
-    playlists() {
+    playlists(): void {
         this.getMusicService.getPlaylist()
-            .subscribe(data => {
+            .subscribe((data: any) => {
                 this.playlist = data.tracks.playlist;
-                console.log(data);
             });
     }
 
-    onSubmit() {
-        this.localStorage.setItem('tracks', JSON.stringify(this.tracks));
+    findTracks(): void {
         setTimeout(() => {
             this.router.navigate(['/']);
         }, 1000);
     }
 
-    removeTrackFromPlaylist(playlistName, trackName) {
+    removeTrackFromPlaylist(playlistName, trackName): void {
         let data = {
             playlistName: playlistName,
             trackName: trackName
         };
 
         this.getMusicService.removeTrackFromPlaylist(data)
-            .subscribe(data => {
-                console.log(data);
+            .subscribe(() => {
                 this.playlists();
             });
     }
+
 }

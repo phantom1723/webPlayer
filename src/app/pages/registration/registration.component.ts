@@ -10,7 +10,6 @@ import {Router} from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
     form: FormGroup;
-    inf: any;
     error: string;
 
     constructor(private userService: UserService,
@@ -49,48 +48,14 @@ export class RegistrationComponent implements OnInit {
     onSubmit() {
         const user = this.form.value;
         this.userService.createNewUser(user)
-            .subscribe(data => {
-                this.inf = data;
-                if (this.inf.status === 200) {
+            .subscribe((data: any) => {
+                if (data.status === 200) {
                     this.error = '';
                     this.router.navigate(['/']);
-                    this.userService.login(this.inf.token);
-
+                    this.userService.login(data.token);
                 } else {
                     this.error = 'Something\'s wrong. Please, check again.';
                 }
-            });
-    }
-
-    registrateTwitter() {
-        this.userService.registrateWithTwitter()
-            .subscribe(data => {
-                console.log(data);
-               /* this.inf = data;
-                if (this.inf.status === 200) {
-                    this.error = '';
-                    this.router.navigate(['/']);
-                    this.userService.login(this.inf.token);
-
-                } else {
-                    this.error = 'Something\'s wrong. Please, check again.';
-                }*/
-            });
-    }
-
-    registrateGoogle() {
-        this.userService.registrateWithGoogle()
-            .subscribe(data => {
-                console.log(data);
-                 /*this.inf = data;
-                 if (this.inf.status === 200) {
-                 this.error = '';
-                 this.router.navigate(['/']);
-                 this.userService.login(this.inf.token);
-
-                 } else {
-                 this.error = 'Something\'s wrong. Please, check again.';
-                 } */
             });
     }
 }

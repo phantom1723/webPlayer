@@ -1,4 +1,4 @@
-<app-header (submit)="onSubmit()"></app-header>
+<app-header (submit)="findTracks()"></app-header>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark pink darken-4">
     <links class="nav-links">
         <ul class="navbar-nav">
@@ -21,35 +21,27 @@
 
 <div class="container">
     <div class="row justify-content-md-center">
-        <div class="col-12">
-    <div class="user wow fadeIn animated">
-    <p>Hello, {{user.name}}</p> <!-- User names -->
-        <h4 class="h4 text-center grey-text">Hello, {{user.name}}</h4>
-    <form (ngSubmit)="createPlaylist()">
-        <input type="text" [formControl]="form">
-        <input type="submit" value="Create new playlist">
-    </form>
+        <div class="col-12 ">
+            <div class="user wow fadeIn animated">
+                <form (ngSubmit)="createPlaylist()">
+                    <input type="text" [formControl]="form">
+                    <input type="submit" class="btn btn-unique waves-light" value="Create new playlist">
+                </form>
 
-    <div *ngFor="let item of playlist">
-        <h2>{{item.playlistName}}</h2>
+                <div *ngFor="let item of playlist">
+                    <h2>{{item.playlistName}}</h2>
 
-        <div class="cotainer-fluid">
-            <div class="row">
-                <div *ngFor="let track of item.tracks; let i = index">
-                    <app-player  [item]="track"></app-player>
-                    <span (click)="removeTrackFromPlaylist(item.playlistName, track.trackName)">|| x</span>
+                    <div class="cotainer-fluid" >
+                        <div class="row flex-center grid">
+                            <div class="items-container" *ngFor="let track of item.tracks; let i = index" >
+                                <app-player [item]="track" [i]="i"></app-player>
+                                <span (click)="removeTrackFromPlaylist(item.playlistName, track.trackName)" class="remover">x</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
-
-
-                <!--
-                            <p (click)="onClick(item.preview_url)">|></p>
-                -->
             </div>
-        </div>
-
-    </div>
-</div>
         </div>
     </div>
 </div>

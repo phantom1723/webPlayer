@@ -44,17 +44,15 @@ export class UserSettingsComponent implements OnInit {
         let value = this.form.value;
 
                 this.userService.changeNameAndEmail(value.name, value.email)
-                    .subscribe(() => {
-                        console.log('email change');
-                    });
+                    .subscribe();
 
                 this.userService.changeUserPassword(value.password)
                     .subscribe();
 
     }
 
-    deleteUser() {
+    deleteUser(): void {
         this.userService.deleteUser()
-            .subscribe(() => console.log('user deleted'));
+            .subscribe();
     }
 }

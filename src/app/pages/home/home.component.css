@@ -1,0 +1,25 @@
+@keyframes wave {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.home .container-fluid {
+  justify-content: center;
+  align-items: center;
+  display: flex; }
+
+.row {
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 950px;
+  max-height: 300vw; }
+
+@media screen and (max-width: 923px) {
+  .row {
+    max-height: 700vw; } }
+@media screen and (max-width: 588px) {
+  .row {
+    max-height: 100%; } }
+
+/*# sourceMappingURL=home.component.css.map */

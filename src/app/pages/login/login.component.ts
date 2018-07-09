@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -11,9 +10,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
     form: FormGroup;
-    inf: any;
     error: string;
-
 
     constructor(private userService: UserService,
                 private router: Router) {
@@ -37,19 +34,15 @@ export class LoginComponent implements OnInit {
 
         if (this.form.value.email && this.form.value.password) {
             this.userService.signInUser(user)
-                .subscribe(data => {
-                    this.inf = data;
-
-                    if (this.inf.status === 200) {
+                .subscribe((data: any) => {
+                    if (data.status === 200) {
                         this.error = '';
-                        this.userService.login(this.inf.token);
+                        this.userService.login(data.token);
                         this.router.navigate(['/']);
                     } else {
-                        this.error = this.inf.err;
+                        this.error = data.err;
                     }
-                    console.log(this.inf);
                 });
         }
     }
-
 }

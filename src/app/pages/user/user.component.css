@@ -1,0 +1,44 @@
+.container {
+  max-width: 950px; }
+
+.user h2 {
+  color: #fff;
+  margin: 2rem 0 1rem; }
+.user .h4 {
+  margin-bottom: 2rem; }
+.user .btn {
+  padding: 0.35rem 0.6rem; }
+.user .items-container {
+  position: relative;
+  grid-row-end: span 2; }
+.user .flex-center {
+  /* display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   max-height: 300vw;*/
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(287px, 287px));
+  grid-auto-rows: 287px; }
+.user .remover {
+  background-color: #880e4f;
+  box-shadow: 0 0 4px #000;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.3rem 0.8rem;
+  position: absolute;
+  right: 0.9rem;
+  top: 0;
+  z-index: 1; }
+
+@media only screen and (max-width: 991px) {
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center; }
+    .nav-links .navbar-nav {
+      flex-direction: row; } }
+
+/*# sourceMappingURL=user.component.css.map */

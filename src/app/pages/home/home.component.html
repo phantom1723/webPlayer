@@ -1,12 +1,9 @@
-<app-header *ngIf="localStorage.getItem('token')" (searchedTracks)="display($event)"></app-header>
+<app-header *ngIf="localStorage.getItem('isAuth') == 'true'" (searchedTracks)="display($event)"></app-header>
 
 <div class="home">
-    <div class="cotainer-fluid">
-        <div class="row">
-                <app-player *ngFor="let item of tracks; let i = index" [item]="item"></app-player>
-                <!--
-                            <p (click)="onClick(item.preview_url)">|></p>
-                -->
-            </div>
+    <div class="container-fluid">
+        <div class="row flex-center">
+            <app-player *ngFor="let item of tracks; let i = index" [item]="item" [i]="i"></app-player>
         </div>
     </div>
+</div>

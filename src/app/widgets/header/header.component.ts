@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.form = new FormControl();
+        console.log('header');
     }
 
     signOut() {
@@ -45,7 +46,6 @@ export class HeaderComponent implements OnInit {
                 if (this.inf.status == 200) {
                     this.inf = this.inf.tracks.tracks.items;
                     this.localStorage.setItem('tracks', JSON.stringify(this.inf));
-                    console.log(this.inf);
                     this.searchedTracks.emit(this.inf);
 
                 } else if (this.inf.status == 401) {

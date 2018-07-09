@@ -33,10 +33,10 @@
   }
 }
 .view {
-  background: no-repeat center center;
+  background: no-repeat center fixed;
   background-size: cover;
   margin-bottom: 50px;
-  height: 100vh;
+  height: 70vh;
 }
 .form-inline {
   input::placeholder {
@@ -44,7 +44,9 @@
     padding-left: 15px;
   }
   .form-control {
+    background-color: rgba(127,63,191,0.4);
     color: #fff;
+    font-size: 4vh;
     width: 100%;
     &:focus {
       border-bottom: 1px solid #fff!important;
