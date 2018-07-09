@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAW;EACT,OAAO,EAAE,IAAI;EACb,MAAM,EAAE,OAAO;EACf,KAAK,EAAE,IAAI",
+"sources": ["recovery.component.scss"],
+"names": [],
+"file": "recovery.component.css"
+}

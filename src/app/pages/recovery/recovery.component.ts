@@ -5,7 +5,7 @@ import {UserService} from '../../services/user.service';
 @Component({
     selector: 'app-recovery',
     templateUrl: './recovery.component.html',
-    styleUrls: ['./recovery.component.css']
+    styleUrls: ['./recovery.component.scss']
 })
 export class RecoveryComponent implements OnInit {
     recovery: FormControl;
